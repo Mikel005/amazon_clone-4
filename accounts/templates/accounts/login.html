@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {% comment %} {{ form.as_p}} {% endcomment %}
+    <input type="text" name="username" placeholder="Username"><br><br>
+    <input type="password" name="password" placeholder="Password"><br><br>
+    <button type="submit">Login</button>
+</form>
+<p>I don't have an account! <a href="{% url 'signup' %}"> signup </a> </p>
+{% comment %} <p style="color:red;">{{ error }}</p> {% endcomment %}
+{% endblock %}

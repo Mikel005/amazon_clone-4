@@ -1,0 +1,6 @@
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2 style="text-align:center;">✅ Order placed successfully!</h2>
+    <p>your product ID is <strong>#{{ order.id }} </strong></p>
+    <p style="text-align:center;"><a href="{% url 'home' %}">Back to home</a></p>
+    {% endblock %}

@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazon clone</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <nav>
+        <a href="/"><img src="{% static '/images/amzon logo.jpg' %}" width="100" alt=""></a>
+        <div class="nav-country">
+            <img src="{% static '/images/location icon.png' %}"height="20" color="white" alt="">
+            <div>
+                <p>deliver to</p>
+                <h1>united kingdom</h1>
+            </div>
+        </div>
+
+        <div class="nav-search">
+            <div class="nav-search-gategory">
+                <p>ALL</p>
+                <img src="{% static '/images/dropdown_icon.png' %}" height="12" alt="">
+            </div>
+            <input type="text" class="nav-search-input" placeholder="search amazon">
+            <img src="{% static '/images/search_icon.png' %}" class="nav-search-icon" alt="">
+        </div>
+
+        <div class="nav-language">
+            <img src="{% static '/images/us_flag.png' %}" width="25px" alt="">
+            <p>EN</p>
+            <img src="{% static '/images/dropdown_icon.png' %}" width="8px" alt="">
+        </div>
+
+
+        <div class="nav-text">
+            <p>Hello, sign in</p>
+            <a href="/accounts/signup/"><h1>account & lists <img src="{% static '/images/dropdown_icon.png' %}"  width="8px" alt=""></h1></a>
+        </div>
+
+        <div class="nav-text">
+            <p>Return</p>
+            <a href="{% url 'order_history' %}">
+            <h1>& Orders<img src="{% static '/images/dropdown_icon.png' %}"  width="8px" alt=""></h1>
+            </a>
+        </div>
+
+        <div>
+        <a href="{% url 'view_cart' %}" class="nav-cart">
+            <img src="{% static '/images/cart.png' %}"  width="35px" alt="">
+
+            <h4>Cart</h4>
+        </a>
+        </div>
+    </nav>
+
+
+    <div class="nav-bottom">
+        <div>
+            <img src="{% static '/images/dropdown_icon.png' %}" width="25px" alt="">
+            <p>ALL</p>
+            <p>Todays deal</p>
+            <p>Customer services</p>
+            <p>Registry</p>
+            <p>Gift Card</p>
+            <p>Sell</p>
+        </div>
+    </div>
+
+    {% block content %}
+    <div class="header-slider">
+        <a href="#" class="control_prev">&#129144</a>
+        <a href="#" class="control_next">&#129146</a>
+        <ul>
+            <img id="banner" src="{% static '/images/b1.jpg' %}"  class="header-img" alt="">
+            <img id="banner" src="{% static '/images/b2.jpg' %}"  class="header-img" alt="">
+            <img id="banner" src="{% static '/images/b3.jpg' %}"  class="header-img" alt="">
+            <img id="banner" src="{% static '/images/b4.jpg' %}"  class="header-img" alt="">
+            
+        </ul>
+    </div>
+
+
+
+
+
+
+<div class='products'>
+
+    {% for product in products %}
+        
+            <div class='product'>
+            <a href="{% url 'product_detail' product.pk %}">{{ product.title }}</a><br>
+            <img src="{{ product.image.url }}" width="100"/><br>
+            ${{ product.price }}
+            </div>
+        
+    {% endfor %} 
+</div> 
+
+
+<div class='products'>
+{% for product in products %}
+    {% for category in categories %}
+        <div class="category-container">
+        <h2>{{ category.name }}</h2>
+        {% for subcategory in category.subcategories.all %}
+            <div class="subcategory-container">
+            <h3>{{ subcategory.name }}</h3>
+            <div class="products-grid">
+            {% for products in subcategory.products.all %}
+                <div class="product-card">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+                    <a href="{% url 'product_detail' product.pk %}">{{ product.title }}</a><br>
+                    <p>{{ product.name }}</p>
+                    <p>${{ product.price }}</p>
+                </div>
+            {% endfor %}
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>  
+
+    {% comment %} <div class="box-row header-box">
+        <div class="box-col">
+            <h3>Free international returns</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>lunar new year</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>toy under $25</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>Deals in PCs</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+    </div>
+
+
+    <div class="box-row">
+        <div class="box-col">
+            <h3>Free international returns</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>lunar new year</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>toy under $25</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>Deals in PCs</h3>
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <a href="/">shop more</a>
+        </div>
+    </div>
+{% endcomment %}
+
+
+    <div class="products-slider">
+        <h2>Best sellers in Sports & Outdoors</h2>
+        
+    {% comment %} {% for category in categories %} {% endcomment %}
+
+        
+        {% comment %} {% for products in subcategory.products.all %} {% endcomment %}
+        <div class="products">
+            {% for product in products %}
+            
+                <a href="{% url 'product_detail' product.pk %}"><img src="{{ product.image.url }}" alt="{{ product.name }}"/></a>
+            {% endfor %}
+        </div>
+        {% comment %} {% endfor %} {% endcomment %}
+    {% comment %} {% endfor %} {% endcomment %}
+        
+    </div>
+
+
+
+    {% comment %}  
+    <div class="products-slider">
+        <h2>Best sellers in Sports & Outdoors</h2>
+        <div class="products">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            <img src="{% static '/images/cart.png' %}" alt="">
+            
+        </div>
+    </div>
+
+
+
+    <div class="box-row">
+        <div class="box-col">
+            <h3>Free international returns</h3>
+            <img src="./asset/cart.png" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>lunar new year</h3>
+            <img src="./asset/cart.png" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>toy under $25</h3>
+            <img src="./asset/cart.png" alt="">
+            <a href="/">shop more</a>
+        </div>
+        <div class="box-col">
+            <h3>Deals in PCs</h3>
+            <img src="./asset/cart.png" alt="">
+            <a href="/">shop more</a>
+        </div>
+    </div>
+    {% endcomment %}
+
+
+{% comment %} <div class="categories-container">
+    {% for category in categories %}
+        <div class="category-box">
+            <h2>{{ category.name }}</h2>
+        
+            <div class="subcategories">
+                {% for sub in category.subcategories.all %}
+                    <div class="subcategory">
+                        <img src="{{ subcategories.image.url }}" alt="{{ product.name }}">
+                        <h3>{{ sub.name }}</h3>
+                        <div class="products-cat">
+                            {% for product in sub.products.all|slice:":4" %}
+                                <div class="product-card">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    <p>{{ product.name }}</p>
+                                    <span>${{ product.price }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div> {% endcomment %}
+
+
+
+
+
+
+
+
+
+<div class="category-container-2">
+    <h2>fashion</h2>   {% comment %}<a href="{% url 'category_detail' 'fashion' %}">Fashion</a> {% endcomment %}
+    <div class="products-row-2">
+        {% for product in cloths_products %}
+            <div class="product-card-2">
+                <a href="#">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <p>{{ product.name|truncatechars:20 }}</p>
+                    <span>${{ product.price }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Electronics preview -->
+<div class="category-container-2">
+    <h2>Electronics</h2>
+    <div class="products-row-2">
+        {% for product in Electronics_preview %}
+            <div class="product-card-2">
+                <a href="#">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <p>{{ product.name|truncatechars:20 }}</p>
+                    <span>${{ product.price }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Phones (subcategory) preview -->
+<div class="category-container-2">
+    <h2>Phones</h2>
+    <div class="products-row-2">
+        {% for product in phones_preview %}
+            <div class="product-card-2">
+                <a href="#">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <p>{{ product.name|truncatechars:20 }}</p>
+                    <span>${{ product.price }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script scr="{% static 'js/main.js' %}"></script>
+{% endblock %}
+</body>
+</html>

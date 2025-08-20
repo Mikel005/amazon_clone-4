@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content%}
+<h2>Confirm Your Order</h2>
+{% for item in items %}
+    <p>{{ item.product.title }} - Qty: {{ item.quantity }} - Total: {{ item.total_price }}</p>
+
+<hr>
+<p><strong>Total:</strong> {{ total }}</p>
+{% endfor %}
+<form method="post">
+    {% csrf_token %}
+<button type="submit">Place Order</button>
+{% endblock %}

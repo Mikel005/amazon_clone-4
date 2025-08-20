@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="order-container">
+    <h2>My Orders</h2><br>
+    <hr>
+    <br>
+{% comment %} <ul class="order_ul"> {% endcomment %}
+{% for order in orders %}
+    <div class="order-card">
+        <div class="order-image">
+            <img src="{{ order.product.image.url}}" alt="{{ order.product.title}}">
+        </div>
+        <div style="order-details">
+            <h3>{{ order.product.title }}</h3>
+            <p><strong>Order ID:</strong> #{{ order.id }}</p>
+            <p><strong>Date:</strong> {{ order.created_at|date:"d M Y" }}</p>
+            <p><strong>Total:</strong> {{ order.total }}</p>
+            <P>Status: <span class="status {{ order.status|lower }}">{{ order.status}}</span></P>
+            <ul>
+            {% for item in order.items.all %}
+                <li>{{ item.product.name }} (x{{ item.quantity }}) - ₦{{ item.total_price }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% empty %}
+        <p>You have no past orders.</p>
+        {% comment %} <li>{{ order.quantity }} * {{ order.product.title }} - ${{ order.product.price }} on {{ order.created_at }}</li>
+        {% empty %}
+        <li>You have no orders.</li> {% endcomment %}
+        
+            
+    {% comment %} </ul> {% endcomment %}
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

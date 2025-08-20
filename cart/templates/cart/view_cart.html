@@ -1,0 +1,112 @@
+{% extends 'base.html' %} 
+{% comment%}
+    {% comment %} {% extends 'base.html' %}
+    {% block content %}
+    <h2 style="text-align:center;">Your Cart</h2>
+    <div class="products">
+    {% for item in cart_items %}
+    <div class="product">
+        <img src="{{ item.product.image.url }}">
+        <h3>{{ product.title }}</h3>
+        <p>Price: ${{ item.product.price }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+        {% comment %} <p>Total: ${{ item.item_total }}</p> {% endcomment %}
+        {% comment %} <h2>Total: ${{ total }}</h2> {% endcomment %}
+        {% comment %} <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a> {% endcomment %}
+
+        {% comment %} <form method="post" action="{% url 'update_cart_item' item.id %}">
+        {% csrf_token %}
+        <label>Quantity:</label>
+        <input type="number" name="quantity" value="{{ item.quantity }}" min="0" style="width: 50px;">
+        <button type="submit">Update</button>
+        </form>
+
+        <form method="post" action="{% url 'remove_cart_item' item.id %}" style="margin-top: 5px;">
+        {% csrf_token %}
+        <button type="submit" style="background: red; color: white;">Remove</button>
+        </form>
+
+    </div>
+    
+    {% endfor %}
+
+    <h1><p>Your cart is empty.</p></h1>
+    </div>
+    {% comment %} <div style="text-align:center; margin: 2rem;">
+    <h2>Total: ${{ total }}</h2>
+    <a href="{% url 'checkout' %}"> <button>proceed to checkout</button> </a>
+    </div> {% endcomment %}
+    {% comment %} {% endblock %}  {% endcomment %}
+
+
+    
+{% comment %} {% block content %}
+<h2>Your Cart</h2>
+{% if items %}
+    <ul>
+        {% for item in items %}
+            <div class='product'>
+            <img src="ccc" width="50" height="50" /><br>
+            
+        
+            <li>{{ item.product.title }} x {{ item.quantity }} - ${{ item.product.price }} each
+                <a href="{% url 'remove_cart_item' item.id %}">Remove</a>
+            </li>
+            </div>
+        {% endfor %}
+    </ul>
+    <p>Total: ${{ total }}</p>
+    <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %} {% endcomment %}
+
+{% block content %}
+{% if items %}
+<div class="cart">
+    
+
+        <div class="cart-left">
+            <h1>Shopping cart</h1>
+            {% for item in items %}
+            
+            <hr>
+            <div class="product-cart-list">
+                <img src="{{ item.product.image.url }}"  width="100" alt="">
+                <div>
+                    <div class="product-cart-titleprice">
+                        
+                        <p>Name:{{ item.product.title }} </p><br>
+                            <p>Quantity:{{ item.quantity }}</p><br>
+                            <p>Price:${{ item.product.price }}</p>
+                        
+                        {% comment %} <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi repellendus fuga quam reiciendis natus earum, obcaecati nemo, reprehenderit dicta hic officia eius ea voluptatem, rerum veniam fugit porro incidunt! Recusandae.
+                        </p>
+                        <p><b>$249.00</b></p> {% endcomment %}
+                    </div>
+                    <p class="product-cart-bestseller"><span>#1 best seller</span> in computer tablets</p>
+                    <p>in stock</p>
+                    <p>free delivery mon, jan 29 available at checkout</p>
+                    <p>free return &#11191</p>
+                    <p>gift option not available</p> 
+                    <a href="{% url 'remove_cart_item' item.id %}">Remove</a>
+                </div>
+            </div>
+            {% endfor %}
+            <div>
+                <p>Total: ${{ total }}</p><br>
+                <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+            </div>
+        </div>
+            
+        <div class="cart-right">
+
+        </div>
+    
+{% else %}
+    <p>Your cart is empty.</p>
+</div>
+{% endif %}
+{% endblock %}
